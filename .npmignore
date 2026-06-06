@@ -1,4 +1,5 @@
 .github/
+.claude/
 systemd/
 docker-compose.yml
 Dockerfile

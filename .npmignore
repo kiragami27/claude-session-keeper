@@ -1,0 +1,6 @@
+.github/
+systemd/
+docker-compose.yml
+Dockerfile
+config.example.yml
+*.log

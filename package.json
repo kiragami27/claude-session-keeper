@@ -1,0 +1,39 @@
+{
+  "name": "claude-session-keeper",
+  "version": "1.0.0",
+  "description": "Automatically ping Claude Code when your 5-hour session resets, preventing session drift",
+  "main": "src/keeper.js",
+  "bin": {
+    "claude-session-keeper": "bin/claude-session-keeper.js",
+    "csk": "bin/claude-session-keeper.js"
+  },
+  "scripts": {
+    "start": "node bin/claude-session-keeper.js start",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "anthropic",
+    "session",
+    "productivity",
+    "automation"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kiragami27/claude-session-keeper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kiragami27/claude-session-keeper/issues"
+  },
+  "homepage": "https://github.com/kiragami27/claude-session-keeper#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "chokidar": "^3.6.0",
+    "commander": "^12.0.0",
+    "js-yaml": "^4.1.0"
+  }
+}

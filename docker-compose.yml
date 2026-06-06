@@ -1,0 +1,11 @@
+services:
+  claude-session-keeper:
+    build: .
+    restart: unless-stopped
+    volumes:
+      # Mount your Claude config so the keeper can watch activity AND the CLI can authenticate
+      - ~/.claude:/root/.claude
+      # Persist keeper state across container restarts
+      - ~/.claude-session-keeper:/root/.claude-session-keeper
+    environment:
+      - NODE_ENV=production

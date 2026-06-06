@@ -1,0 +1,17 @@
+[Unit]
+Description=Claude Session Keeper
+Documentation=https://github.com/kiragami27/claude-session-keeper
+After=network.target
+
+[Service]
+Type=simple
+# Runs as your user — change to your actual username
+User=%i
+ExecStart=/usr/bin/env npx claude-session-keeper start
+Restart=on-failure
+RestartSec=15
+# Give the claude CLI access to your home directory
+Environment=HOME=/home/%i
+
+[Install]
+WantedBy=default.target

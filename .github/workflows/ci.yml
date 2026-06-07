@@ -15,5 +15,5 @@ jobs:
         with:
           node-version: '20'
       - run: npm ci
-      - run: node --check bin/claude-session-keeper.js
-      - run: node --check src/keeper.js src/watcher.js src/scheduler.js src/config.js
+      - run: node --check bin/claude-session-keeper.js bin/csk-mcp.js
+      - run: node --check src/keeper.js src/watcher.js src/scheduler.js src/config.js src/mcp-server.js

@@ -35,7 +35,6 @@ class SessionKeeper {
       } else {
         this._doSchedule(new Date(this._state.sessionStartedAt));
         this.scheduler.keepAlive();
-        this.log.info(`Restored ping scheduled for ${t.toLocaleString()}`);
       }
     }
 

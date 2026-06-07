@@ -95,10 +95,19 @@ class SessionKeeper {
     const isNewSession = gap > this.config.inactivityThreshold;
 
     if (isNewSession && !this.scheduler.isScheduled) {
-      this.log.info(`New Claude session detected`);
       this._state.sessionStartedAt = now.toISOString();
-      this._doSchedule(now);
-      this.scheduler.keepAlive();
+
+      if (gap >= this.config.sessionDuration) {
+        // Session already expired during the absence — ping immediately
+        this.log.info(
+          `Claude session already reset (inactive for ${formatDuration(gap)}) — pinging now`
+        );
+        this._sendPing();
+      } else {
+        this.log.info(`New Claude session detected`);
+        this._doSchedule(now);
+        this.scheduler.keepAlive();
+      }
     }
 
     this._saveState();
@@ -106,7 +115,7 @@ class SessionKeeper {
 
   _doSchedule(sessionStart) {
     const fireAt = new Date(
-      sessionStart.getTime() + this.config.sessionDuration - this.config.pingBuffer
+      sessionStart.getTime() + this.config.sessionDuration + this.config.pingDelay
     );
     this._state.nextPingAt = fireAt.toISOString();
 

@@ -14,7 +14,7 @@ const STATE_DIR = path.join(os.homedir(), '.claude-session-keeper');
 const DEFAULTS = {
   sessionDuration: 5 * 60 * 60 * 1000,    // 5 hours
   inactivityThreshold: 30 * 60 * 1000,    // 30 min gap = new session
-  pingBuffer: 30 * 1000,                  // send ping 30s before reset
+  pingDelay: 5 * 60 * 1000,               // send ping 5 min AFTER reset (not before)
   claudeCommand: 'claude',
   pingPrompt: 'hi',
   claudeDir: path.join(os.homedir(), '.claude'),
@@ -58,7 +58,9 @@ function loadConfig(configPath) {
       const raw = yaml.load(fs.readFileSync(filePath, 'utf8')) || {};
       if (raw.sessionDuration) raw.sessionDuration = parseDuration(raw.sessionDuration);
       if (raw.inactivityThreshold) raw.inactivityThreshold = parseDuration(raw.inactivityThreshold);
-      if (raw.pingBuffer) raw.pingBuffer = parseDuration(raw.pingBuffer);
+      if (raw.pingDelay) raw.pingDelay = parseDuration(raw.pingDelay);
+      // backwards compat: pingBuffer used to mean "send N ms before reset"
+      if (raw.pingBuffer) raw.pingDelay = parseDuration(raw.pingBuffer);
       overrides = raw;
     } catch (e) {
       console.warn(`Warning: could not parse config file: ${e.message}`);

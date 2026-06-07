@@ -8,8 +8,10 @@ sessionDuration: 5h
 # If you're actively using Claude, a short pause won't reset the timer
 inactivityThreshold: 30m
 
-# How early before the reset to send the ping (buffer for CLI startup time)
-pingBuffer: 30s
+# How long to wait AFTER the 5-hour reset before sending the ping.
+# Waiting ensures the old session is fully expired before the new one opens.
+# Sending too early (before the reset) wastes the ping on the expiring window.
+pingDelay: 5m
 
 # The claude CLI command name (change if installed elsewhere)
 claudeCommand: claude

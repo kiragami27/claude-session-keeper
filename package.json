@@ -1,11 +1,12 @@
 {
   "name": "claude-session-keeper",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Automatically ping Claude Code when your 5-hour session resets, preventing session drift",
   "main": "src/keeper.js",
   "bin": {
     "claude-session-keeper": "bin/claude-session-keeper.js",
-    "csk": "bin/claude-session-keeper.js"
+    "csk": "bin/claude-session-keeper.js",
+    "csk-mcp": "bin/csk-mcp.js"
   },
   "scripts": {
     "start": "node bin/claude-session-keeper.js start",
